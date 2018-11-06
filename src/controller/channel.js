@@ -5,7 +5,7 @@ import Channel from '../model/channel';
 
 import { authenticate } from '../middleware/authMiddleware';
 
-export default({ config, db }) => {
+export default() => {
   let api = Router();
 
   //'/v1/channel/add' - Create

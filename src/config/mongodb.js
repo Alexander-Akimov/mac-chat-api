@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
 import mongodb from 'mongodb';
-import config from './config';
+import config from './settings';
 
 export default callback => {
   let db;
+  mongoose.Promise = require('bluebird');
   // Connect to the database before starting the application server.
   mongoose.connect(config.mongoUrl, function (err, database) {
     if (err) {

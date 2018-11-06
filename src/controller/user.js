@@ -1,11 +1,9 @@
-import mongoose from 'mongoose';
 import { Router } from 'express';
-import bodyParser from 'body-parser';
 import User from '../model/user';
 
 import { authenticate } from '../middleware/authMiddleware';
 
-export default({ config, db }) => {
+export default() => {
   let api = Router();
 
   // '/v1/user/add' - Create

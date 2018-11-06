@@ -5,7 +5,7 @@ import Message from '../model/message';
 
 import { authenticate } from '../middleware/authMiddleware';
 
-export default({ config, db }) => {
+export default() => {
   let api = Router();
 
   // '/v1/message/add' - Create
@@ -35,9 +35,10 @@ export default({ config, db }) => {
       message.messageBody = req.body.messageBody;
       message.userId = req.body.userId;
       message.channelId = req.body.channelId;
-      newMessage.userName = req.body.userName;
+
+      /*newMessage.userName = req.body.userName;
       newMessage.userAvatar = req.body.userAvatar;
-      newMessage.userAvatarColor = req.body.userAvatarColor;
+      newMessage.userAvatarColor = req.body.userAvatarColor;*/
 
       message.save(err => {
         if (err) {
