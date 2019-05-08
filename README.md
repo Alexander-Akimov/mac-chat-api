@@ -19,7 +19,8 @@ your development skills to the next level, check out our API course.
 
 #### Chat App REST API with ES6 and Express.
 
-- ES6 support via [babel](https://babeljs.io)
+- ES6 support  ~~via [babel](https://babeljs.io)~~ 
+- Out-of-box support ES6 [ECMAScript Modules](https://nodejs.org/api/esm.html)
 - Express is Node.js web application framework via [express](https://github.com/expressjs/express)
 - Passport authentication for Node.js via [passport](https://github.com/passport)
 - Socket.IO enables real-time bidirectional event-based communication via [socket.io](https://github.com/socketio/socket.io)
