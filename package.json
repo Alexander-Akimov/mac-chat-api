@@ -1,11 +1,13 @@
 {
   "name": "slacky-slack",
   "version": "1.0.0",
-
   "description": "Prebuilt api for slack app clone.",
   "type": "module",
   "main": "./src/index.js",
-  
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Alexander-Akimov/mac-chat-api.git"
+  },
   "scripts": {
     "start": "node --experimental-modules src/index.js",
     "lint": "eslint src",

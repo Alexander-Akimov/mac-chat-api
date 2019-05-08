@@ -1,8 +1,8 @@
 
-import userController  from '../controller/userController.js';
-import account from '../controller/accountController.js';
-import channel from '../controller/channelController.js';
-import message from '../controller/messageController.js';
+import userController  from '../controllers/userController.js';
+import account from '../controllers/accountController.js.js';
+import channel from '../controllers/channelController.js';
+import message from '../controllers/messageController.js';
 
 export default (app, passport) => {
   //app.use(middleware({ config, db }));

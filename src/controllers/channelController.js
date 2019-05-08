@@ -3,9 +3,9 @@ import mongoose from 'mongoose';
 import express from 'express';
 
 import bodyParser from 'body-parser';
-import Channel from '../model/channel.js';
+import Channel from '../models/channel.js';
 
-import { authenticate } from '../middleware/authMiddleware.js';
+import { authenticate } from '../middlewares/authMiddleware.js';
 
 export default() => {
   let api = express.Router();

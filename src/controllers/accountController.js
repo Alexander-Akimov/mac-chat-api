@@ -5,10 +5,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import config from '../config/settings.js';
-import Account from '../model/account.js';
-import UserDataExt from './extensions/userData-ext.js';
+import Account from '../models/account.js';
+import UserDataExt from './extensions/userData-ext.js.js';
 
-import { generateAccessToken, respond, authenticate } from '../middleware/authMiddleware.js';
+import { generateAccessToken, respond, authenticate } from '../middlewares/authMiddleware.js';
 
 export default () => {
   let api = express.Router();

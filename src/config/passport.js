@@ -1,6 +1,6 @@
 import passportlocal from 'passport-local';
 
-import Account from '../model/account.js';
+import Account from '../models/account.js';
 
 export default (passport) => {
   passport.use(new passportlocal.Strategy({

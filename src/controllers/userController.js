@@ -1,10 +1,10 @@
 // import { Router } from 'express';
 import express from 'express';
 
-import User from '../model/user.js';
+import User from '../models/user.js';
 
 
-import { authenticate } from '../middleware/authMiddleware.js';
+import { authenticate } from '../middlewares/authMiddleware.js';
 
 export default () => {
   let api = express.Router();
