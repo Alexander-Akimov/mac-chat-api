@@ -6,36 +6,39 @@ import bodyParser from 'body-parser';
 import passport from 'passport';
 import config from '../config/settings.js';
 import Account from '../models/account.js';
-import UserDataExt from './extensions/userData-ext.js.js';
+import User from '../models/user.js';
+import UserDataExt from '../extensions/userData-ext.js';
 
-import { generateAccessToken, respond, authenticate } from '../middlewares/authMiddleware.js';
+export default function AccountController() {
 
-export default () => {
-  let api = express.Router();
-
-  // '/v1/account/register'
-  api.post('/register', (req, res) => {
-    UserDataExt.findUserByEmail(req.body.email, (err, userData) => {
-      if (err) {
-        res.status(409).json({ message: `An error occured: ${err.message}` });
-      } else if (userData) {
-        res.status(300).json({ message: `Email ${req.body.email} is already registered` });
-      }
-      else {
-        Account.register(new Account({ username: req.body.email }), req.body.password, function (err, account) {
-          if (err) {
-            res.status(500).json({ message: err });
-          }
-          passport.authenticate('local', { session: false })(req, res, () => {
-            res.status(200).send('Successfully created new account');
+  this.registr = function (req, res, next) {
+    User.findOne({ 'email': req.body.email })
+      .then((userData) => {
+        if (userData != null) {
+          console.log(`userData: ${userData}`);
+          res.status(300).json({ message: `Email ${req.body.email} is already registered` });
+        }
+        else {
+          Account.register(new Account({ username: req.body.email }), req.body.password, function (err, account) {
+            if (err) {
+              res.status(500).json({ message: err });
+            } else {
+              next();
+            }
           });
-        });
-      }
-    });
-  });
+        }
+      })
+      .catch((err) => {
+        console.log(`error: ${err}`);
+        res.status(409).json({ message: `An error occured: ${err.message}` });
+      });
+  };
 
-  // '/v1/account/login'
-  api.post('/login', (req, res, next) => {
+  this.successRegistr = function (req, res) {
+    res.status(200).json({ message: 'Successfully created new account' });
+  };
+
+  this.login = function (req, res, next) {
     UserDataExt.findUserByEmail(req.body.email, (err, userData) => {
       if (err) {
         res.status(409).json({ message: `An error occured: ${err.message}` });
@@ -43,22 +46,14 @@ export default () => {
         next();
       }
     });
-  }, passport.authenticate('local', { session: false, scope: [], failWithError: true }),
-    (err, req, res, next) => {
-      if (err) {
-        res.status(401).json({ message: `Email or password invalid, please check your credentials` });
-      }
-    }, generateAccessToken, respond);
+  };
 
-  // '/v1/account/logout'
-  api.get('/logout', authenticate, (req, res) => {
+  this.logout = function (req, res) {
     res.logout();
     res.status(200).send('Successfully logged out');
-  });
+  };
 
-  api.get('/me', authenticate, (req, res) => {
+  this.me = function (req, res) {
     res.status(200).json(req.user);
-  });
-
-  return api;
+  };
 }

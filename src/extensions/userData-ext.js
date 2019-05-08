@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-import UserData from '../../model/user.js';
+import User from '../models/user.js';
 
 class UserDataExt {
 
   static findUserByEmail(email, callback) {
-    UserData.findOne({ 'email': email }, (err, userData) => {
+    User.findOne({ 'email': email }, (err, userData) => {
       if (err) {
         return callback(err, null);
       } else{

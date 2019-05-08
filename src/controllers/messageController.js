@@ -4,7 +4,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import Message from '../models/message.js';
 
-import { authenticate } from '../middlewares/authMiddleware.js';
+import { authenticate } from '../middlewares/authMiddleware.mjs';
 
 export default() => {
   let api = express.Router();

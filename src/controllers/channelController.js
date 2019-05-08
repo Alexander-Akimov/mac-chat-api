@@ -5,8 +5,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import Channel from '../models/channel.js';
 
-import { authenticate } from '../middlewares/authMiddleware.js';
-
 export default() => {
   let api = express.Router();
 
