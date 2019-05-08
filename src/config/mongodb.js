@@ -1,11 +1,14 @@
 import mongoose from 'mongoose';
 import mongodb from 'mongodb';
-import config from './settings';
+import config from './settings.js';
+import bluebird from 'bluebird';
 
 export default callback => {
   let db;
-  mongoose.Promise = require('bluebird');
+  mongoose.Promise = bluebird;
   // Connect to the database before starting the application server.
+  mongoose.set('useCreateIndex', true);
+  mongoose.set('useNewUrlParser', true);
   mongoose.connect(config.mongoUrl, function (err, database) {
     if (err) {
       console.log(err);

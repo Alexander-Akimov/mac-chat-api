@@ -1,8 +1,9 @@
-import { Strategy as LocalStrategy } from 'passport-local';
-import Account from '../model/account';
+import passportlocal from 'passport-local';
+
+import Account from '../model/account.js';
 
 export default (passport) => {
-  passport.use(new LocalStrategy({
+  passport.use(new passportlocal.Strategy({
     usernameField: 'email',
     passwordField: 'password'
   },

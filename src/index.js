@@ -1,9 +1,9 @@
-import configExpress from './config/express';
-import configPassport from './config/passport';
-import configSockets from './config/sockets';
-import configMongoDb from './config/mongodb';
-import configRouting from './config/routes';
-import settings from './config/settings';
+import configExpress from './config/express.js';
+import configPassport from './config/passport.js';
+import configSockets from './config/sockets.js';
+import configMongoDb from './config/mongodb.js';
+import configRouting from './config/routes.js';
+import settings from './config/settings.js';
 import http from 'http';
 import express from 'express';
 import passport from 'passport';
@@ -27,7 +27,7 @@ const io = configSockets(app);
 app.server.listen(settings.port);
 console.log(`Started on port ${app.server.address().port}`);
 
-module.exports = { // For what puporse????
+export  { // For what puporse????
   app,
   io
 }

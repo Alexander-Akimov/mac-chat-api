@@ -1,5 +1,5 @@
 import bodyParser from 'body-parser';
-import config from './settings'
+import config from './settings.js'
 
 export default (app, passport) => {
   //middleware

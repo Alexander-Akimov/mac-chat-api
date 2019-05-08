@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
-import { Router } from 'express';
+// import { Router } from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
-import Message from '../model/message';
+import Message from '../model/message.js';
 
-import { authenticate } from '../middleware/authMiddleware';
+import { authenticate } from '../middleware/authMiddleware.js';
 
 export default() => {
-  let api = Router();
+  let api = express.Router();
 
   // '/v1/message/add' - Create
   api.post('/add', authenticate, (req, res) => {

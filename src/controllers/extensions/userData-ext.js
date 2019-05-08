@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import UserData from '../../model/user';
+import UserData from '../../model/user.js';
 
 class UserDataExt {
 

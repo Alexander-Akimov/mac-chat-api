@@ -1,6 +1,6 @@
 import socket from 'socket.io';
-import Message from '../model/message';
-import Channel from '../model/channel';
+import Message from '../model/message.js';
+import Channel from '../model/channel.js';
 
 export default (app) => {
 //!!!!!!!!!app.server must be initialized

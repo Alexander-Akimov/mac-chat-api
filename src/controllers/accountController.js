@@ -1,15 +1,17 @@
 import mongoose from 'mongoose';
-import { Router } from 'express';
+// import { Router } from 'express';
+import express from 'express';
+
 import bodyParser from 'body-parser';
 import passport from 'passport';
-import config from '../config/settings';
-import Account from '../model/account';
-import UserDataExt from './extensions/userData-ext';
+import config from '../config/settings.js';
+import Account from '../model/account.js';
+import UserDataExt from './extensions/userData-ext.js';
 
-import { generateAccessToken, respond, authenticate } from '../middleware/authMiddleware';
+import { generateAccessToken, respond, authenticate } from '../middleware/authMiddleware.js';
 
 export default () => {
-  let api = Router();
+  let api = express.Router();
 
   // '/v1/account/register'
   api.post('/register', (req, res) => {
@@ -19,16 +21,16 @@ export default () => {
       } else if (userData) {
         res.status(300).json({ message: `Email ${req.body.email} is already registered` });
       }
-      // else {
-      Account.register(new Account({ username: req.body.email }), req.body.password, function (err, account) {
-        if (err) {
-          res.status(500).json({ message: err });
-        }
-        passport.authenticate('local', { session: false })(req, res, () => {
-          res.status(200).send('Successfully created new account');
+      else {
+        Account.register(new Account({ username: req.body.email }), req.body.password, function (err, account) {
+          if (err) {
+            res.status(500).json({ message: err });
+          }
+          passport.authenticate('local', { session: false })(req, res, () => {
+            res.status(200).send('Successfully created new account');
+          });
         });
-      });
-      // }
+      }
     });
   });
 

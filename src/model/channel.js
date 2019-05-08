@@ -1,10 +1,10 @@
-
 import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
 
-const channelSchema = new Schema({
+const channelSchema = mongoose.Schema({
   name: String, default: "",
   description: String, default: ""
 });
 
-module.exports = mongoose.model('Channel', channelSchema);
+let Channel = mongoose.model('Channel', channelSchema);
+
+export default Channel;

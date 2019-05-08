@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
-import User from './user';
-import Channel from './channel';
+import User from './user.js';
+import Channel from './channel.js';
 
-const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const messageSchema = new Schema({
+const messageSchema = mongoose.Schema({
   messageBody: String, default: "",
   timeStamp: {type: Date, default: Date.now},
   userId: {type: ObjectId, ref: 'User'},
@@ -15,4 +14,5 @@ const messageSchema = new Schema({
   userAvatarColor: String, default: ""
 });
 
-module.exports = mongoose.model('Message', messageSchema);
+let Message = mongoose.model('Message', messageSchema);
+export default Message;

@@ -1,10 +1,13 @@
-import { Router } from 'express';
-import User from '../model/user';
+// import { Router } from 'express';
+import express from 'express';
 
-import { authenticate } from '../middleware/authMiddleware';
+import User from '../model/user.js';
 
-export default() => {
-  let api = Router();
+
+import { authenticate } from '../middleware/authMiddleware.js';
+
+export default () => {
+  let api = express.Router();
 
   // '/v1/user/add' - Create
   api.post('/add', authenticate, (req, res) => {
@@ -81,7 +84,7 @@ export default() => {
       if (err) {
         res.status(500).json({ message: err });
       }
-      res.status(200).json({ message: 'User Successfully Removed'});
+      res.status(200).json({ message: 'User Successfully Removed' });
     });
   });
 
@@ -91,7 +94,7 @@ export default() => {
       if (err) {
         res.status(500).json({ message: err });
       }
-      res.status(200).json({ message: 'Users All Removed'});
+      res.status(200).json({ message: 'Users All Removed' });
     });
   });
 
