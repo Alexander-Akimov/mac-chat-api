@@ -1,16 +1,8 @@
-import mongoose from 'mongoose';
-// import { Router } from 'express';
-import express from 'express';
-import bodyParser from 'body-parser';
 import Message from '../models/message.js';
 
-import { authenticate } from '../middlewares/authMiddleware.mjs';
+export default function MessageController() {
 
-export default() => {
-  let api = express.Router();
-
-  // '/v1/message/add' - Create
-  api.post('/add', authenticate, (req, res) => {
+  this.add = function (req, res) {
     let newMessage = new Message();
     newMessage.messageBody = req.body.messageBody;
     newMessage.userId = req.body.userId;
@@ -25,10 +17,9 @@ export default() => {
       }
       res.status(200).json({ message: 'Message saved successfully' })
     });
-  });
+  };
 
-  // '/v1/message/:id' - Update
-  api.put('/:id', authenticate, (req, res) => {
+  this.updateById = function (req, res) {
     Message.findById(req.params.id, (err, message) => {
       if (err) {
         res.status(500).json({ message: err });
@@ -48,40 +39,35 @@ export default() => {
         res.status(200).json({ message: 'Message updated' });
       });
     });
-  });
+  };
 
-  // '/v1/message/byChannel/:channelId'
-  api.get('/byChannel/:channelId', authenticate, (req, res) => {
+  this.getById = function (req, res) {
     Message
-      .find({ 'channelId' : req.params.channelId }, (err, messages) => {
-        if(err) {
+      .find({ 'channelId': req.params.channelId }, (err, messages) => {
+        if (err) {
           res.status(500).json({ message: err });
         }
         res.status(200).json(messages);
       });
-  });
+  };
 
-  // '/vq/message/:id' -Delete
-  api.delete('/:id', authenticate, (req, res) => {
+  this.deleteById = function (req, res) {
     Message.remove({
       _id: req.params.id
     }, (err, message) => {
       if (err) {
         res.status(500).json({ message: err });
       }
-      res.status(200).json({ message: 'Message Successfully Removed'});
+      res.status(200).json({ message: 'Message Successfully Removed' });
     });
-  });
+  };
 
-  // '/v1/message/' - Delete all
-  api.delete('/', authenticate, (req, res) => {
+  this.deleteAll = function (req, res) {
     Message.find({}, (err, users) => {
       if (err) {
         res.status(500).json({ message: err });
       }
-      res.status(200).json({ message: 'Users All Removed'});
+      res.status(200).json({ message: 'Users All Removed' });
     });
-  });
-
-  return api;
+  }
 }
