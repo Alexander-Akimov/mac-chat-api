@@ -4,10 +4,7 @@ import AccountController from '../controllers/accountController.js';
 import ChannelController from '../controllers/channelController.js';
 import MessageController from '../controllers/messageController.js';
 
-
 import { authenticate, unAuthHandle, generateAccessToken, respond } from '../middlewares/authMiddleware.mjs';
-
-
 
 export default (app, passport) => {
   //app.use(middleware({ config, db }));
@@ -16,7 +13,6 @@ export default (app, passport) => {
   // app.use('/v1/user', userController());
 
   //let api = express.Router();
-  // '/v1/user/add' - Create
 
   const userController = new UserController();
   app.post('/v1/user/add', authenticate, userController.add);// '/v1/user/add' - Create  
@@ -38,17 +34,17 @@ export default (app, passport) => {
 
   const channelController = new ChannelController();
   //app.use('/v1/channel', channel());
-  app.post('/add', authenticate, channelController.add); //'/v1/channel/add' - Create
-  app.get('/', authenticate, channelController.getAll);// '/v1/channel/' - Read
-  app.get('/:id', authenticate, channelController.getById);// '/v1/channel/:id' - Read 1
-  app.delete('/:id', authenticate, channelController.deleteById);// '/vq/channel/:id' -Delete
+  app.post('/v1/channel/add', authenticate, channelController.add); //'/v1/channel/add' - Create
+  app.get('/v1/channel/', authenticate, channelController.getAll);// '/v1/channel/' - Read
+  app.get('/v1/channel/:id', authenticate, channelController.getById);// '/v1/channel/:id' - Read 1
+  app.delete('/v1/channel/:id', authenticate, channelController.deleteById);// '/vq/channel/:id' -Delete
 
   const messageController = new MessageController();
-  app.post('/add', authenticate, messageController.add); // '/v1/message/add' - Create
-  app.put('/:id', authenticate, messageController.updateById);// '/v1/message/:id' - Update
-  app.get('/byChannel/:channelId', authenticate, messageController.getById);// '/v1/message/byChannel/:channelId'
-  app.delete('/:id', authenticate, messageController.deleteById);  // '/vq/message/:id' -Delete
-  app.delete('/', authenticate, messageController.deleteAll);// '/v1/message/' - Delete all
+  app.post('/v1/message/add', authenticate, messageController.add); // '/v1/message/add' - Create
+  app.put('/v1/message/:id', authenticate, messageController.updateById);// '/v1/message/:id' - Update
+  app.get('/v1/message/byChannel/:channelId', authenticate, messageController.getById);// '/v1/message/byChannel/:channelId'
+  app.delete('/v1/message/:id', authenticate, messageController.deleteById);  // '/vq/message/:id' -Delete
+  app.delete('/v1/message/', authenticate, messageController.deleteAll);// '/v1/message/' - Delete all
 
   // Base URL test endpoint to see if API is running
   app.get('/', (req, res) => {
