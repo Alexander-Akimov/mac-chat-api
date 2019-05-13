@@ -3,7 +3,7 @@ import mongodb from 'mongodb';
 import config from './settings.js';
 import bluebird from 'bluebird';
 
-export default callback => {
+export default (callback) => {
   let db;
   mongoose.Promise = bluebird;
   // Connect to the database before starting the application server.

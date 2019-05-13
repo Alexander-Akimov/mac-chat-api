@@ -2,7 +2,7 @@ import configExpress from './config/express.js';
 import configPassport from './config/passport.js';
 import configSockets from './config/sockets.js';
 import configMongoDb from './config/mongodb.js';
-import configRouting from './config/routes.js';
+
 import settings from './config/settings.js';
 import http from 'http';
 import express from 'express';
@@ -15,12 +15,12 @@ configExpress(app, passport);
 
 configPassport(passport);
 
+//console.log(__dirname);
+
 //connect to db
 configMongoDb(db => {
   //internal middleware
 });
-
-configRouting(app, passport);
 
 const io = configSockets(app);
 

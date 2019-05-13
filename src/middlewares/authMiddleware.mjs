@@ -32,4 +32,8 @@ let unAuthHandle = function (err, req, res, next) {
   }
 };
 
-export { authenticate, generateAccessToken, respond, unAuthHandle }
+let assume404 = (req, res, next) => {
+  res.redirect('/');//redirect if the request cannot be hadled
+};
+
+export { authenticate, generateAccessToken, respond, unAuthHandle, assume404 }
