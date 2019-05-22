@@ -27,7 +27,7 @@ const io = configSockets(app);
 app.server.listen(settings.port);
 console.log(`Started on port ${app.server.address().port}`);
 
-export  { // For what puporse????
+export { // For what puporse????
   app,
   io
 }
